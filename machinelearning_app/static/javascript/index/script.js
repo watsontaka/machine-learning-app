@@ -1,6 +1,6 @@
 function navigateTo(feature) {
-  if (feature === 'image-recognition') {
-    window.location.href = 'image-recognition.html';
+  if (feature === 'image-recognize') {
+    window.location.href = 'image_recognize/';
   } else if (feature === 'numeric-analysis') {
     window.location.href = 'numeric-analysis.html';
   } else if (feature === 'nlp') {
