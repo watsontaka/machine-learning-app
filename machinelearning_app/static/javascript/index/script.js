@@ -2,7 +2,7 @@ function navigateTo(feature) {
   if (feature === 'image-recognize') {
     window.location.href = 'image_recognize/';
   } else if (feature === 'numeric-analysis') {
-    window.location.href = 'numeric-analysis.html';
+    window.location.href = 'numeric_analysis/';
   } else if (feature === 'nlp') {
     window.location.href = 'nlp.html';
   } else {

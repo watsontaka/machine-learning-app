@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数値解析ページ</title>
+  <link rel="stylesheet" href="{% static 'css/numeric_analysis/style.css' %}">
+</head>
+<body>
+  <header>
+    <h1>数値解析AI</h1>
+    <p>数値データを入力して、AIがどのようなパターンやトレンドを発見するか確認しましょう。</p>
+  </header>
+
+  <section id="input-section">
+    <h2>数値データを入力</h2>
+    <form id="data-form">
+      <label for="data-input">数値データ（カンマ区切りで入力）:</label><br>
+      <textarea id="data-input" rows="5" cols="50" placeholder="例: 10, 20, 30, 40, 50"></textarea><br><br>
+      <button type="button" onclick="analyzeData()">AIで解析する</button>
+    </form>
+  </section>
+
+  <section id="result-section" style="display: none;">
+    <h2>解析結果</h2>
+    <div id="analysis-result">ここに解析結果が表示されます。</div>
+  </section>
+
+  <script src="{% static 'javascript/numeric_analysis/script.js' %}"></script>
+</body>
+</html>
