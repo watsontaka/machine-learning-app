@@ -1,11 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
+{% load static %}
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>テストWebアプリ</title>
-  </head>
-  <body>
-    <h1>{{title}}</h1>
-    <p>{{name}}</p>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 機能トップページ</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>AI機能プラットフォーム</h1>
+    <p>画像認識や数値解析など、最先端のAI技術を体験しましょう。</p>
+  </header>
+
+  <section id="features">
+    <h2>利用可能なAI機能</h2>
+    <div class="feature-card">
+      <h3>画像認識</h3>
+      <p>アップロードされた画像をAIが解析し、物体や顔を認識します。</p>
+      <button onclick="navigateTo('image-recognition')">画像認識を試す</button>
+    </div>
+
+    <div class="feature-card">
+      <h3>数値解析</h3>
+      <p>数値データをAIが分析し、予測やパターンを導き出します。</p>
+      <button onclick="navigateTo('numeric-analysis')">数値解析を試す</button>
+    </div>
+
+    <div class="feature-card">
+      <h3>自然言語処理</h3>
+      <p>テキストデータをAIが理解し、キーワード抽出や感情分析を行います。</p>
+      <button onclick="navigateTo('nlp')">自然言語処理を試す</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 AI機能プラットフォーム</p>
+  </footer>
+
+  <script src="static/javascript/script.js"></script>
+</body>
 </html>
