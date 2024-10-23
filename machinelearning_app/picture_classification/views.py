@@ -1,10 +1,21 @@
 from django.shortcuts import render
 
+app_name = 'picture_classification'
+
 def index_view(request):
 
-  my_dicts = {
-    'title':'画像認識プログラム',
-    'name':'磯野貴慎',
-  }
+  return render(request, 'index.html')
 
-  return render(request, 'index.html', my_dicts)
+
+def image_recognize_view(request):
+
+  return render(request, 'image_recognize.html')
+
+
+def numeric_analysis_view(request):
+
+  return render(request, 'numeric_analysis.html')
+
+def npl_view(request):
+
+  return render(request, 'nlp.html')
