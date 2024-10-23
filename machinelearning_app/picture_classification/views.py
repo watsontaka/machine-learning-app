@@ -15,3 +15,7 @@ def image_recognize_view(request):
 def numeric_analysis_view(request):
 
   return render(request, 'numeric_analysis.html')
+
+def npl_view(request):
+
+  return render(request, 'nlp.html')
