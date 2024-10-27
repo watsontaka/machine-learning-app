@@ -15,16 +15,55 @@
 
   <section id="input-section">
     <h2>数値データを入力</h2>
-    <form id="data-form">
-      <label for="data-input">数値データ（カンマ区切りで入力）:</label><br>
-      <textarea id="data-input" rows="5" cols="50" placeholder="例: 10, 20, 30, 40, 50"></textarea><br><br>
-      <button type="button" onclick="analyzeData()">AIで解析する</button>
-    </form>
-  </section>
+    <form id="data-form" action="{% url 'picture_classification:numeric_analysis'%}" method="post">
+      {% csrf_token %}
 
-  <section id="result-section" style="display: none;">
-    <h2>解析結果</h2>
-    <div id="analysis-result">ここに解析結果が表示されます。</div>
+      <label for="name">氏名:</label><br>
+        <input type="text" id="name" name="name" /><br>
+      
+      <label for="age">年齢:</label><br>
+        <input type="number" id="age" name="age" /><br>
+      
+      <label for="sex-select">性別:</label><br>
+        <select name="sex" id="sex-select">
+          <option value="">--選択してください--</option>
+          <option value="0">男性</option>
+          <option value="1">女性</option>
+        </select><br>
+
+      <label for="education-select">学歴:</label><br>
+        <select name="education" id="education-select">
+          <option value="">--選択してください--</option>
+          <option value="1">高卒</option>
+          <option value="2">大卒</option>
+          <option value="3">大学院卒</option>
+        </select><br>
+      
+
+      <label for="occupation-select">職業:</label><br>
+        <select name="occupation" id="occupation-select">
+          <option value="">--選択してください--</option>
+          <option value="0">公務員</option>
+          <option value="1">民間企業</option>
+          <option value="2">無職</option>
+        </select><br>
+
+      <label for="income">年収:</label><br>
+        <input type="number" id="income" name="income"/>万円<br>
+
+      <label for="loan">借入金額:</label><br>
+        <input type="number" id="loan" name="loan"/>万円<br>
+
+      <label for="loan-history-select">過去の借入歴:</label><br>
+        <select name= "loan-history" id="loan-history-select">
+          <option value="">--選択してください--</option>
+          <option value="0">あり</option>
+          <option value="1">なし</option>
+        </select><br>
+
+      <br><br>
+      <button type="submit">保存</button>
+    </form>
   </section>
 
   <script src="{% static 'javascript/numeric_analysis/script.js' %}"></script>
