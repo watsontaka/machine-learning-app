@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>データ一覧ページ</title>
+  <link rel="stylesheet" href="{% static 'css/list/style.css' %}">
+</head>
+<body>
+  <header>
+    <h1>データ一覧</h1>
+    <p>入力されたデータを一覧表示し、編集・削除が可能です。</p>
+  </header>
+
+  <section id="list-section">
+    <h2>データ一覧</h2>
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>氏名</th>
+          <th>年齢</th>
+          <th>性別</th>
+          <th>学歴</th>
+          <th>職業</th>
+          <th>年収</th>
+          <th>借入金額</th>
+          <th>過去の借入</th>
+        </tr>
+      </thead>
+      <tbody id="data-body">
+        {% for item in object_list %}
+          <tr class="list">
+            <td class="name">{{ item.name }}</td>
+            <td class="age">{{ item.age }}</td>
+            <td class="sex">{{ item.sex }}</td>
+            <td class="education">{{ item.education }}</td>
+            <td class="occupation">{{ item.occupation }}</td>
+            <td class="income">{{ item.income }}</td>
+            <td class="loan">{{ item.loan }}</td>
+            <td class="loan-history">{{ item.loan_history }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <script src="{% static 'javascript/list/script.js' %}"></script>
+</body>
+</html>

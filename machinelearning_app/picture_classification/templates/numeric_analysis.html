@@ -65,7 +65,12 @@
       <button type="submit">保存</button>
     </form>
   </section>
+  
+  <a href="{% url 'picture_classification:list' %}">THE OTHER PAGE</a>
+  <section id="feature">
+    <button onclick="navigateTo('list')">データ一覧</button>
+  </section>
 
-  <script src="{% static 'javascript/numeric_analysis/script.js' %}"></script>
+  <script src="static/javascript/index/script.js"></script>
 </body>
 </html>

@@ -51,3 +51,10 @@ def logistic_predict(request):
 def npl_view(request):
 
   return render(request, 'nlp.html')
+
+def list_view(request):
+
+  object_list = Logistic_Predict.objects.all()
+  context = {'object_list': object_list}
+
+  return render(request, 'list.html', context)
