@@ -11,10 +11,11 @@
   <header>
     <h1>数値解析AI</h1>
     <p>数値データを入力して、AIがどのようなパターンやトレンドを発見するか確認しましょう。</p>
+    <button id="back-button" onclick="goBack()">← 戻る</button>
   </header>
 
   <section id="input-section">
-    <h2>数値データを入力</h2>
+    <h2>データを入力</h2>
     <form id="data-form" action="{% url 'picture_classification:numeric_analysis'%}" method="post">
       {% csrf_token %}
 
@@ -34,9 +35,9 @@
       <label for="education-select">学歴:</label><br>
         <select name="education" id="education-select">
           <option value="">--選択してください--</option>
-          <option value="1">高卒</option>
-          <option value="2">大卒</option>
-          <option value="3">大学院卒</option>
+          <option value="0">高卒</option>
+          <option value="1">大卒</option>
+          <option value="2">大学院卒</option>
         </select><br>
       
 
@@ -49,10 +50,10 @@
         </select><br>
 
       <label for="income">年収:</label><br>
-        <input type="number" id="income" name="income"/>万円<br>
+        <input type="number" id="income" name="income"/><br>
 
       <label for="loan">借入金額:</label><br>
-        <input type="number" id="loan" name="loan"/>万円<br>
+        <input type="number" id="loan" name="loan"/><br>
 
       <label for="loan-history-select">過去の借入歴:</label><br>
         <select name= "loan-history" id="loan-history-select">
@@ -71,6 +72,6 @@
     <button onclick="navigateTo('list')">データ一覧</button>
   </section>
 
-  <script src="static/javascript/index/script.js"></script>
+  <script src="{% static 'javascript/numeric_analysis/script.js' %}"></script>
 </body>
 </html>

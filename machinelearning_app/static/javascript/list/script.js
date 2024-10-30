@@ -79,3 +79,7 @@ function deleteData(id) {
   dataList = dataList.filter(data => data.id !== id);
   renderTable(); // テーブルを再描画
 }
+
+function goBack() {
+  window.history.back();
+}
