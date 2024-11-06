@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>画像認識ページ</title>
-  <link rel="stylesheet" href="{% static 'css/image_recognize/style.css' %}">
-</head>
-<body>
-  <header>
-    <h1>画像認識AI</h1>
-    <p>画像をアップロードして、AIが何を認識するか確認しましょう。</p>
-  </header>
+{% extends 'base.html' %}
+{% block content %}
 
   <section id="upload-section">
     <h2>画像をアップロード</h2>
@@ -29,6 +17,4 @@
     <div id="analysis-result">結果はここに表示されます</div>
   </section>
 
-  <script src="{% static 'static/javascript/image_recognize/script.js' %}"></script>
-</body>
-</html>
+{% endblock %}
