@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 機能トップページ</title>
-  <link rel="stylesheet" href="static/css/index/style.css">
-</head>
-<body>
-  <header>
-    <h1>AI機能プラットフォーム</h1>
-    <p>画像認識や数値解析など、最先端のAI技術を体験しましょう。</p>
-  </header>
+{% extends 'base.html' %}
+{% block content %}
 
   <section id="features">
     <h2>利用可能なAI機能</h2>
@@ -34,10 +22,5 @@
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2024 AI機能プラットフォーム</p>
-  </footer>
+{% endblock %}
 
-  <script src="static/javascript/index/script.js"></script>
-</body>
-</html>

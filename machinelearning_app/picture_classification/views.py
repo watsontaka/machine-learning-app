@@ -23,7 +23,6 @@ def image_recognize_view(request):
 
 def numeric_analysis_view(request):
   if request.method == 'POST':
-
     name = request.POST['name']
     age = request.POST['age']
     sex = request.POST['sex']
@@ -44,23 +43,6 @@ def numeric_analysis_view(request):
     return redirect(to='/')
   else:
     return render(request, 'numeric_analysis.html')
-
-'''
-def logistic_predict(request):
-  feature = Logistic_Predict.objects.all()
-
-  if request.method =='POST':
-    form = Logistic_Predict_Form(request.POST)
-    if form.is_valid():
-      form.save()
-
-    else:
-      form = Logistic_Predict_Form
-    
-
-
-  return render(request)
-'''
 
 def list_view(request):
 

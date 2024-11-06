@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>データ一覧ページ</title>
-  <link rel="stylesheet" href="{% static 'css/list/style.css' %}">
-</head>
-<body>
-  <header>
-    <h1>データ一覧</h1>
-    <p>入力されたデータを一覧表示し、編集・削除が可能です。</p>
-    <button id="back-button" onclick="goBack()">← 戻る</button>
-  </header>
+{% extends 'base.html' %}
+{% block content %}
 
   <section id="list-section">
     <h2>データ一覧</h2>
@@ -69,14 +56,15 @@
             {% else %}
               <td class="loan-history">なし</td>
             {% endif %}
-
-            <td class="pred">{{ item.default_pred }}</td>
+            
+            {% if item.default_pred == 0 %}
+              <td class="pred">高い</td>
+            {% else %}
+              <td class="pred">低い</td>
+            {% endif %}
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </section>
-
-  <script src="{% static 'javascript/list/script.js' %}"></script>
-</body>
-</html>
+{% endblock %}
