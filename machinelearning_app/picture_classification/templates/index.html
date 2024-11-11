@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
   <section id="features">
@@ -21,6 +22,8 @@
       <button onclick="navigateTo('nlp')">自然言語処理を試す</button>
     </div>
   </section>
+
+<script src="{% static 'javascript/index/script.js' %}"></script>
 
 {% endblock %}
 

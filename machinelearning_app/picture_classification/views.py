@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 
 import numpy as np
 import pickle
@@ -22,6 +23,7 @@ def image_recognize_view(request):
   return render(request, 'image_recognize.html')
 
 def numeric_analysis_view(request):
+
   if request.method == 'POST':
     name = request.POST['name']
     age = request.POST['age']
@@ -43,6 +45,10 @@ def numeric_analysis_view(request):
     return redirect(to='/')
   else:
     return render(request, 'numeric_analysis.html')
+  
+def npl_view(request):
+
+  return render(request, 'nlp.html')
 
 def list_view(request):
 
@@ -51,7 +57,18 @@ def list_view(request):
 
   return render(request, 'list.html', context)
 
-def npl_view(request):
+def graph_view(request):
 
-  return render(request, 'nlp.html')
+  sex_counts = Logistic_Predict.objects.values('sex')
 
+  counts_list = []
+
+  for c in sex_counts:
+    counts_list.append(c['sex'])
+
+  context = {
+        'male' : counts_list.count(0),
+        'female' : counts_list.count(1),
+    }
+
+  return render(request, 'graph.html', context)
