@@ -6,13 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>自然言語処理ページ</title>
   <link rel="stylesheet" href="{% static 'css/nlp/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base/style.css' %}">
 </head>
 <body>
-  <header>
-    <h1>自然言語処理AI</h1>
-    <p>入力されたテキストをAIが解析します。感情分析やキーワード抽出が可能です。</p>
-  </header>
-
+  {% include 'header.html' %}
   <section id="input-section">
     <h2>テキストを入力</h2>
     <form id="text-form">

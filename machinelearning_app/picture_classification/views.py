@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 import numpy as np
 import pickle
@@ -22,6 +22,7 @@ def image_recognize_view(request):
 
   return render(request, 'image_recognize.html')
 
+
 def numeric_analysis_view(request):
 
   if request.method == 'POST':
@@ -42,33 +43,54 @@ def numeric_analysis_view(request):
       income = income, loan = loan, loan_history = loan_history, default_pred = default_pred
     )
     object.save()
-    return redirect(to='/')
+    return redirect(to='/list')
   else:
     return render(request, 'numeric_analysis.html')
+
   
 def npl_view(request):
 
   return render(request, 'nlp.html')
 
+'''
 def list_view(request):
 
-  object_list = Logistic_Predict.objects.all()
+  object_list = Logistic_Predict.objects.all() 
   context = {'object_list': object_list}
 
   return render(request, 'list.html', context)
+'''
+
+def list_view(request):
+
+  object_list = Logistic_Predict.objects.order_by('id').all() 
+  paginator = Paginator(object_list, 3)
+
+  page_number = request.GET.get("page")
+  page_obj = paginator.get_page(page_number)
+
+  return render(request, 'list.html', {"page_obj": page_obj} )
+
+
+
 
 def graph_view(request):
 
-  sex_counts = Logistic_Predict.objects.values('sex')
+  data_counts = Logistic_Predict.objects.values('sex', 'occupation')
 
-  counts_list = []
+  sex_counts = []
+  occupation_counts = []
 
-  for c in sex_counts:
-    counts_list.append(c['sex'])
+  for c in data_counts:
+    sex_counts.append(c['sex'])
+    occupation_counts.append(c['occupation'])
 
   context = {
-        'male' : counts_list.count(0),
-        'female' : counts_list.count(1),
+        'male' : sex_counts.count(0),
+        'female' : sex_counts.count(1),
+        'government_worker' : occupation_counts.count(0),
+        'private_sector' : occupation_counts.count(1),
+        'unemployed' : occupation_counts.count(2),
     }
 
   return render(request, 'graph.html', context)
