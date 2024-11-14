@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody id="data-body">
-        {% for item in page_obj %}
+        {% for item in object_list %}
           <tr class="list">
 
             <td class="name">{{ item.name }}</td>
@@ -68,21 +68,5 @@
       </tbody>
     </table>
   </section>
-  <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; 先頭へ</a>
-            <a href="?page={{ page_obj.previous_page_number }}">前へ</a>
-        {% endif %}
-
-        <span class="current">
-            {{ page_obj.number }}ページ
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">次へ</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">最後へ &raquo;</a>
-        {% endif %}
-    </span>
-</div>
 {% endblock %}
+

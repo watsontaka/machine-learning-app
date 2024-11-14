@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>棒グラフ</h1>
+  <div style="width: 50%; height: 50%;">
+    <canvas id="BarChart"></canvas>
+  </div>
+  <h2>円グラフ</h2>
+  <div style="width: 50%; height: 50%;">
+    <canvas id="PieChart"></canvas>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('BarChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['male', 'female'],
+      datasets: [{
+        label: '# of Number',
+        data: [{{ male }}, {{ female }}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  const ctx2 = document.getElementById("PieChart");
+  const myPieChart = new Chart(ctx2, {
+    type: 'pie', // 円グラフを使用
+    data: {
+      labels: ['government_worker', 'private_sector', 'unemployed'],
+      datasets: [{
+        backgroundColor: [
+          "#BB5179",
+          "#FAFF67",
+          "#58A27C",
+        ],
+        data: [{{ government_worker }}, {{ private_sector }}, {{ unemployed }}]
+      }]
+    },
+    options: {
+        }
+  });
+</script>
+
+{% endblock %}
