@@ -56,14 +56,6 @@ def npl_view(request):
 
   return render(request, 'nlp.html')
 
-'''
-def list_view(request):
-
-  object_list = Logistic_Predict.objects.all() 
-  context = {'object_list': object_list}
-
-  return render(request, 'list.html', context)
-'''
 
 def list_view(request):
 
@@ -78,20 +70,15 @@ def list_view(request):
 
   try:
     page_obj = paginator.page(page)
+    page_number_list = page_obj.paginator.get_elided_page_range()
   except PageNotAnInteger:
     page_obj = paginator.get_page(1)
+    page_number_list = page_obj.paginator.get_elided_page_range()
   except EmptyPage:
     page_obj = paginator.page(paginator.num_pages)
 
-  return render(request, 'list.html', {"page_obj": page_obj} )
+  return render(request, 'list.html', {"page_obj": page_obj, 'page_number_list': page_number_list})
 
-'''
-  paginator = Paginator(object_list, 3)
-
-  page_number = request.GET.get("page")
-  page_obj = paginator.get_page(page_number)
-  return render(request, 'list.html', {"page_obj": page_obj} )
-'''
 '''
 def edit_view(request, id):
 

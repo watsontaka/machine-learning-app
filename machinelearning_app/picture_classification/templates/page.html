@@ -1,3 +1,4 @@
+<!--
 <div class="pagination">
   <span class="step-links">
     {% if page_obj.has_other_pages %}
@@ -20,9 +21,30 @@
       <li class="page-item">
           <a href="?page={{ page_obj.next_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">次へ</a>
       </li>
-          <a href="?page={{ page_obj.paginator.num_pages }}">最後へ &raquo;</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">最後へ &raquo;</a>
       {% endif %}
     </nav>
     {% endif %}
   </span>
 </div>
+-->
+
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">&laquo;</a>
+  {% endif %}
+  {% for p in page_number_list %}
+    {% if page_obj.number == p %}
+      <a href="?page={{p}}" class="active">{{p}}</a>
+    {% elif p == page_obj.paginator.ELLIPSIS %}
+      <a href="#">{{p}}</a>
+    {% else %}
+      <a href="?page={{p}}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">{{p}}</a>
+    {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">&raquo;</a>
+  {% endif %}
+</div>
+{% endif %}
