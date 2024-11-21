@@ -1,15 +1,11 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>自然言語処理ページ</title>
+
+{% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/nlp/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/base/style.css' %}">
-</head>
-<body>
-  {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
   <section id="input-section">
     <h2>テキストを入力</h2>
     <form id="text-form">
@@ -25,5 +21,4 @@
   </section>
 
   <script src="{% static 'javascript/nlp/script.js' %}"></script>
-</body>
-</html>
+{% endblock %}

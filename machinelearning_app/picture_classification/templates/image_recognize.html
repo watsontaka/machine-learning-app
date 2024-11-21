@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %}
 
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/image_recognize/style.css' %}">
+{% endblock %}
+
+{% block content %}
   <section id="upload-section">
     <h2>画像をアップロード</h2>
     <form id="upload-form">
@@ -16,5 +21,4 @@
     <h2>解析結果</h2>
     <div id="analysis-result">結果はここに表示されます</div>
   </section>
-
 {% endblock %}

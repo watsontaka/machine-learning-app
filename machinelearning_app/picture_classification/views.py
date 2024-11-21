@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
+from django.db.models import Q
+
+from django.views.decorators.http import require_POST
 
 import numpy as np
 import pickle
 import csv
 from sklearn.linear_model import LogisticRegression
-from .models import Logistic_Predict
+from picture_classification.models import Logistic_Predict
 from .forms import Logistic_Predict_Form
 
 app_name = 'picture_classification'
@@ -52,27 +56,41 @@ def npl_view(request):
 
   return render(request, 'nlp.html')
 
-'''
-def list_view(request):
-
-  object_list = Logistic_Predict.objects.all() 
-  context = {'object_list': object_list}
-
-  return render(request, 'list.html', context)
-'''
 
 def list_view(request):
 
-  object_list = Logistic_Predict.objects.order_by('id').all() 
-  paginator = Paginator(object_list, 3)
+  page_obj = Logistic_Predict.objects.order_by('id').all()
+  query = request.GET.get('query')
 
-  page_number = request.GET.get("page")
-  page_obj = paginator.get_page(page_number)
+  if query:
+    page_obj = Logistic_Predict.objects.filter(name__contains=query)
 
-  return render(request, 'list.html', {"page_obj": page_obj} )
+  paginator = Paginator(page_obj, 3)
+  page = request.GET.get("page")
 
+  try:
+    page_obj = paginator.page(page)
+    page_number_list = page_obj.paginator.get_elided_page_range()
+  except PageNotAnInteger:
+    page_obj = paginator.get_page(1)
+    page_number_list = page_obj.paginator.get_elided_page_range()
+  except EmptyPage:
+    page_obj = paginator.page(paginator.num_pages)
 
+  return render(request, 'list.html', {"page_obj": page_obj, 'page_number_list': page_number_list})
 
+'''
+def edit_view(request, id):
+
+  return
+'''
+
+'''
+@require_POST
+def delete_view(request):
+  object_list = 
+  return
+'''
 
 def graph_view(request):
 

@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/list/style.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'search.html' %}
   <section id="list-section">
     <h2>データ一覧</h2>
     <table id="data-table">
@@ -68,21 +73,5 @@
       </tbody>
     </table>
   </section>
-  <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; 先頭へ</a>
-            <a href="?page={{ page_obj.previous_page_number }}">前へ</a>
-        {% endif %}
-
-        <span class="current">
-            {{ page_obj.number }}ページ
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">次へ</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">最後へ &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+{% include 'page.html' %}
 {% endblock %}

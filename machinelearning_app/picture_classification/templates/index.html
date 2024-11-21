@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/index/style.css' %}">
+{% endblock %}
 
+{% block content %}
   <section id="features">
     <h2>利用可能なAI機能</h2>
     <div class="feature-card">
@@ -24,6 +27,5 @@
   </section>
 
 <script src="{% static 'javascript/index/script.js' %}"></script>
-
 {% endblock %}
 
