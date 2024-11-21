@@ -1,33 +1,8 @@
-<!--
-<div class="pagination">
-  <span class="step-links">
-    {% if page_obj.has_other_pages %}
-    <nav class="d-flex justify-content-center"></nav>
-      {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">前へ</a>
-      </li>
-      {% else %}
-      <li>
-        <a href=""></a>
-      </li>
-      {% endif %}
+{% load static %}
 
-      <span class="current">
-          {{ page_obj.number }}ページ
-      </span>
-
-      {% if page_obj.has_next %}
-      <li class="page-item">
-          <a href="?page={{ page_obj.next_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">次へ</a>
-      </li>
-          <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}">最後へ &raquo;</a>
-      {% endif %}
-    </nav>
-    {% endif %}
-  </span>
-</div>
--->
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/page/style.css' %}">
+{% endblock %}
 
 {% if page_obj.has_other_pages %}
 <div class="pagination">

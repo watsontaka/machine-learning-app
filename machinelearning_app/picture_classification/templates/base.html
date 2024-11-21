@@ -6,12 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>共通ヘッダー付きページ</title>
   <link rel="stylesheet" href="{% static 'css/base/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/index/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/list/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/image_recognize/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/numeric_analysis/style.css' %}">
-  <link rel="stylesheet" href="{% static 'css/page/style.css' %}">
-
+  {% block extra_head %}{% endblock %}
 </head>
 <body>
   <!-- 共通ヘッダー -->
