@@ -6,10 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<form action="" method="get">
-  <input name="query" value="{{ request.GET.query }}" type="text" />
-  <button type="submit">検索する</button>
-</form>
+{% include 'search.html' %}
   <section id="list-section">
     <h2>データ一覧</h2>
     <table id="data-table">

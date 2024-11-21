@@ -1,0 +1,12 @@
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/search/style.css' %}">
+{% endblock %}
+
+<div class="search-container">
+  <form action="" method="GET">
+    <input type="text" placeholder="検索キーワードを入力..." name="query" value="{{ request.GET.query }}">
+    <button type="submit">検索</button>
+  </form>
+</div>
