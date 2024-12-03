@@ -1,8 +1,16 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Logistic_Predict
+from .models import Loan_Data
 
-class Logistic_Predict_Form(forms.Form):
-  class Meta:
-    model = Logistic_Predict
-    fields = ['name', 'age', 'sex', 'education', 'occupation', 'income', 'loan', 'loan_history']
+class Loan_Data_Form(forms.Form):
+  name = forms.CharField()
+  age = forms.IntegerField()
+  gender = forms.CharField()
+  education = forms.CharField()
+  income = forms.IntegerField()
+  emp_exp = forms.IntegerField()
+  loan_amount = forms.IntegerField()
+  home_ownership = forms.CharField()
+  loan_intent = forms.CharField()
+  default = forms.CharField()
+  loan_status = forms.CharField()

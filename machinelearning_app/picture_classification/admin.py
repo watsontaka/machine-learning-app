@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Logistic_Predict
+from .models import Loan_Data
 
-admin.site.register(Logistic_Predict)
+admin.site.register(Loan_Data)
 # Register your models here.
