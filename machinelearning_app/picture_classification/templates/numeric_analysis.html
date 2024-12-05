@@ -11,12 +11,15 @@
     <form id="data-form" action="{% url 'picture_classification:numeric_analysis'%}" method="post">
       {% csrf_token %}
 
+      {{ form.errors.name }}
       <label for="name">氏名:</label><br>
         <input type="text" id="name" name="name" /><br>
       
+      {{ form.errors.age }}
       <label for="age">年齢:</label><br>
         <input type="number" id="age" name="age" /><br>
       
+      {{ form.errors.gender }}
       <label for="gender-select">性別:</label><br>
         <select name="gender" id="gender-select">
           <option value="">--選択してください--</option>
@@ -24,6 +27,7 @@
           <option value="女性">女性</option>
         </select><br>
 
+      {{ form.errors.education }}
       <label for="education-select">学歴:</label><br>
         <select name="education" id="education-select">
           <option value="">--選択してください--</option>
@@ -33,18 +37,22 @@
           <option value="修士卒">修士卒</option>
           <option value="博士卒">博士卒</option>
         </select><br>
-
+        
+      {{ form.errors.income }}
       <label for="income">年収:</label><br>
         <input type="number" id="income" name="income"/><br>
-      
-      <label for="emp-exp">就業年数:</label><br>
-        <input type="number" id="emp-exp" name="emp-exp"/><br>
 
-      <label for="loan-amount">融資金額:</label><br>
-        <input type="number" id="loan-amount" name="loan-amount"/><br>
+      {{ form.errors.emp_exp }}
+      <label for="emp_exp">就業年数:</label><br>
+        <input type="number" id="emp_exp" name="emp_exp"/><br>
       
-      <label for="home-ownership-select">家の所有形態:</label><br>
-        <select name="home-ownership" id="home-ownership-select">
+      {{ form.errors.loan_amount }}
+      <label for="loan_amount">融資金額:</label><br>
+        <input type="number" id="loan_amount" name="loan_amount"/><br>
+      
+      {{ form.errors.home_ownership }}
+      <label for="home_ownership-select">家の所有形態:</label><br>
+        <select name="home_ownership" id="home_ownership-select">
           <option value="">--選択してください--</option>
           <option value="賃貸">賃貸</option>
           <option value="自己所有">自己所有</option>
@@ -52,8 +60,9 @@
           <option value="その他">その他</option>
         </select><br>
 
-      <label for="loan-intent-select">利用目的:</label><br>
-        <select name="loan-intent" id="loan-intent-select">
+      {{ form.errors.loan_intent }}
+      <label for="loan_intent-select">利用目的:</label><br>
+        <select name="loan_intent" id="loan_intent-select">
           <option value="">--選択してください--</option>
           <option value="債務返済">債務返済</option>
           <option value="教育">教育</option>
@@ -63,6 +72,7 @@
           <option value="事業">事業</option>
         </select><br>
 
+      {{ form.errors.default }}
       <label for="default-select">不履行歴:</label><br>
         <select name= "default" id="default-select">
           <option value="">--選択してください--</option>

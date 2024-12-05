@@ -10,7 +10,7 @@ import pickle
 import csv
 from sklearn.linear_model import LogisticRegression
 from picture_classification.models import Loan_Data
-from .forms import Loan_Data_Form
+from picture_classification.forms import Loan_Data_Form
 
 app_name = 'picture_classification'
 
@@ -29,46 +29,55 @@ def image_recognize_view(request):
 
 def numeric_analysis_view(request):
 
+  # one-hotベクトルに変換する関数
+  def one_hot(dicts, post):
+    zero = np.zeros(len(dicts))
+    zero[dicts[post]]=1
+    return zero
+    
+    # 金額調整
+  def money_exchange(x):
+    return x*10000
+    
   if request.method == 'POST':
-    name = request.POST['name']
-    age = request.POST['age']
-    gender = request.POST['gender']
-    education = request.POST['education']
-    income = request.POST['income']
-    emp_exp = request.POST['emp-exp']
-    loan_amount = request.POST['loan-amount']
-    home_ownership = request.POST['home-ownership']
-    loan_intent = request.POST['loan-intent']
-    default = request.POST['default']
+    form = Loan_Data_Form(request.POST)
+    if form.is_valid():
+      name = request.POST['name']
+      age = request.POST['age']
+      gender = request.POST['gender']
+      education = request.POST['education']
+      income = request.POST['income']
+      emp_exp = request.POST['emp_exp']
+      loan_amount = request.POST['loan_amount']
+      home_ownership = request.POST['home_ownership']
+      loan_intent = request.POST['loan_intent']
+      default = request.POST['default']
+    
+      # 辞書
+      gender_dict = {'男性':0, '女性':1}
+      education_dict = {'高卒':0, '短大卒':1, '学士卒':2, '修士卒':3, '博士卒':4}
+      home_ownership_dict = {'賃貸':0, '自己所有':1, 'ローン付き':2, 'その他':3}
+      loan_intent_dict = {'債務返済':0, '教育':1, 'リフォーム':2, '医療':3, '私的':4, '事業':5}
+      default_dict = {'はい':0, 'いいえ':1}
 
-    gender_dict = {'男性':0, '女性':1}
-    education_dict = {'高卒':0, '短大卒':1, '学士卒':2, '修士卒':3, '博士卒':4}
-    home_ownership_dict = {'賃貸':0, '自己所有':1, 'ローン付き':2, 'その他':3}
-    loan_intent_dict = {'債務返済':0, '教育':1, 'リフォーム':2, '医療':3, '私的':4, '事業':5}
-    default_dict = {'はい':0, 'いいえ':1}
+      # 予測に使用する説明変数の加工
+      variable_x = np.array([age, gender_dict[gender], education_dict[education], money_exchange(int(income)), emp_exp, money_exchange(int(loan_amount)), default_dict[default]], dtype=np.int64)
+      one_hots = np.concatenate([one_hot(home_ownership_dict, home_ownership), one_hot(loan_intent_dict, loan_intent)])
+      variable_x = np.concatenate([variable_x, one_hots])
+      variable_x = variable_x[np.newaxis,:]
+      loan_status = loaded_model.predict(variable_x)[0]
+      loan_status_dict = {0:'承認', 1:'不承認'}
+      loan_status = loan_status_dict[loan_status]
 
-    def one_hot(dicts, post):
-      zero = np.zeros(len(dicts))
-      zero[dicts[post]]=1
-      return zero
-
-
-    variable_x = np.array([age, gender_dict[gender], education_dict[education], income, emp_exp, loan_amount, default_dict[default]], dtype=np.int64)
-    one_hots = np.concatenate([one_hot(home_ownership_dict, home_ownership), one_hot(loan_intent_dict, loan_intent)])
-    variable_x = np.concatenate([variable_x, one_hots])
-    variable_x = variable_x[np.newaxis,:]
-    loan_status = loaded_model.predict(variable_x)[0]
-
-    loan_status_dict = {0:'承認', 1:'不承認'}
-    loan_status = loan_status_dict[loan_status]
-
-
-    object = Loan_Data.objects.create(
-      name = name, age = age, gender = gender, education = education, income = income, emp_exp = emp_exp, loan_amount = loan_amount, 
-      home_ownership = home_ownership, loan_intent = loan_intent, default=default, loan_status=loan_status,
-    )
-    object.save()
-    return redirect(to='/list')
+      # データの保存
+      object = Loan_Data.objects.create(
+        name = name, age = age, gender = gender, education = education, income = income, emp_exp = emp_exp, loan_amount = loan_amount, 
+        home_ownership = home_ownership, loan_intent = loan_intent, default=default, loan_status=loan_status,
+      )
+      object.save()
+      return redirect(to='/list')
+    else:
+      return render(request, 'numeric_analysis.html', {'form': form})
   else:
     return render(request, 'numeric_analysis.html')
 
@@ -117,19 +126,14 @@ def graph_view(request):
 
   data_counts = Loan_Data.objects.values('gender')
 
-  sex_counts = []
-  occupation_counts = []
+  gender_counts = []
 
   for c in data_counts:
-    sex_counts.append(c['sex'])
-    occupation_counts.append(c['occupation'])
+    gender_counts.append(c['gender'])
 
   context = {
-        'male' : sex_counts.count(0),
-        'female' : sex_counts.count(1),
-        'government_worker' : occupation_counts.count(0),
-        'private_sector' : occupation_counts.count(1),
-        'unemployed' : occupation_counts.count(2),
+        'male' : gender_counts.count('男性'),
+        'female' : gender_counts.count('女性'),
     }
 
   return render(request, 'graph.html', context)

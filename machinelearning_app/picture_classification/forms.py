@@ -1,16 +1,12 @@
+from typing import Any
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Loan_Data
+from picture_classification.models import Loan_Data
+from django.forms import ModelForm
 
-class Loan_Data_Form(forms.Form):
-  name = forms.CharField()
-  age = forms.IntegerField()
-  gender = forms.CharField()
-  education = forms.CharField()
-  income = forms.IntegerField()
-  emp_exp = forms.IntegerField()
-  loan_amount = forms.IntegerField()
-  home_ownership = forms.CharField()
-  loan_intent = forms.CharField()
-  default = forms.CharField()
-  loan_status = forms.CharField()
+class Loan_Data_Form(ModelForm):
+  name = forms.CharField(label='氏名')
+
+  class Meta:
+    model = Loan_Data
+    exclude = ['loan_status']
