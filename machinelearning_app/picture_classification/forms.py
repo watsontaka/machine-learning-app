@@ -1,8 +1,12 @@
+from typing import Any
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Logistic_Predict
+from picture_classification.models import Loan_Data
+from django.forms import ModelForm
 
-class Logistic_Predict_Form(forms.Form):
+class Loan_Data_Form(ModelForm):
+  name = forms.CharField(label='氏名')
+
   class Meta:
-    model = Logistic_Predict
-    fields = ['name', 'age', 'sex', 'education', 'occupation', 'income', 'loan', 'loan_history']
+    model = Loan_Data
+    exclude = ['loan_status']

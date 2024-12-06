@@ -16,62 +16,34 @@
           <th>年齢</th>
           <th>性別</th>
           <th>学歴</th>
-          <th>職業</th>
           <th>年収</th>
+          <th>就業年数</th>
           <th>借入金額</th>
-          <th>過去の借入</th>
-          <th>デフォルトリスク</th>
+          <th>家の所有形態</th>
+          <th>利用目的</th>
+          <th>過去の不履行歴</th>
+          <th>ローンステータス</th>
         </tr>
       </thead>
       <tbody id="data-body">
         {% for item in page_obj %}
           <tr class="list">
-
             <td class="name">{{ item.name }}</td>
-
-            <td class="age">{{ item.age }}</td>
-
-            {% if item.sex == 0 %}
-              <td class="sex">男性</td>
-            {% else %}
-              <td class="sex">女性</td>
-            {% endif %}
-
-            {% if item.education == 0 %}
-              <td class="education">高卒</td>
-            {% elif item.education == 1 %}
-              <td class="education">大卒</td>
-            {% else %}
-              <td class="education">大学院卒</td>
-            {% endif %}
-
-            {% if item.occupation == 0 %}
-              <td class="occupation">公務員</td>
-            {% elif item.occupation == 1 %}
-              <td class="occupation">民間企業</td>
-            {% else %}
-              <td class="occupation">無職</td>
-            {% endif %}
-
-            <td class="income">{{ item.income }}</td>
-
-            <td class="loan">{{ item.loan }}</td>
-
-            {% if item.loan_history == 0 %}
-              <td class="loan-history">あり</td>
-            {% else %}
-              <td class="loan-history">なし</td>
-            {% endif %}
-            
-            {% if item.default_pred == 0 %}
-              <td class="pred">高い</td>
-            {% else %}
-              <td class="pred">低い</td>
-            {% endif %}
+            <td class="age">{{ item.age }}歳</td>
+            <td class="gender">{{ item.gender }}</td>
+            <td class="education">{{ item.education }}</td>
+            <td class="income">{{ item.income }}万円</td>
+            <td class="emp-exp">{{ item.emp_exp }}年</td>
+            <td class="loan-amount">{{ item.loan_amount }}万円</td>
+            <td class="home-ownership">{{ item.home_ownership }}</td>
+            <td class="loan-intent">{{ item.loan_intent }}</td>
+            <td class="loan-amount">{{ item.default }}</td>
+            <td class="loan-amount">{{ item.loan_status }}</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+    <a href="" class="btn btn-primary">csv出力</a>
   </section>
 {% include 'page.html' %}
 {% endblock %}

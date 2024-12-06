@@ -1,3 +1,14 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  color: #f9f9f9;
+  margin-top: 50px;
+}
+
 /* ページネーションのスタイル */
 .pagination {
   display: inline-block;
@@ -16,7 +27,7 @@
 
 .pagination a.active {
   background-color: #4CAF50;
-  color: green;
+  color: white;
   border: 1px solid #4CAF50;
 }
 

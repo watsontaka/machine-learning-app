@@ -11,47 +11,73 @@
     <form id="data-form" action="{% url 'picture_classification:numeric_analysis'%}" method="post">
       {% csrf_token %}
 
+      {{ form.errors.name }}
       <label for="name">氏名:</label><br>
         <input type="text" id="name" name="name" /><br>
       
+      {{ form.errors.age }}
       <label for="age">年齢:</label><br>
         <input type="number" id="age" name="age" /><br>
       
-      <label for="sex-select">性別:</label><br>
-        <select name="sex" id="sex-select">
+      {{ form.errors.gender }}
+      <label for="gender-select">性別:</label><br>
+        <select name="gender" id="gender-select">
           <option value="">--選択してください--</option>
-          <option value="0">男性</option>
-          <option value="1">女性</option>
+          <option value="男性">男性</option>
+          <option value="女性">女性</option>
         </select><br>
 
+      {{ form.errors.education }}
       <label for="education-select">学歴:</label><br>
         <select name="education" id="education-select">
           <option value="">--選択してください--</option>
-          <option value="0">高卒</option>
-          <option value="1">大卒</option>
-          <option value="2">大学院卒</option>
+          <option value="高卒">高卒</option>
+          <option value="短大卒">短大卒</option>
+          <option value="学士卒">学士卒</option>
+          <option value="修士卒">修士卒</option>
+          <option value="博士卒">博士卒</option>
         </select><br>
-      
-
-      <label for="occupation-select">職業:</label><br>
-        <select name="occupation" id="occupation-select">
-          <option value="">--選択してください--</option>
-          <option value="0">公務員</option>
-          <option value="1">民間企業</option>
-          <option value="2">無職</option>
-        </select><br>
-
+        
+      {{ form.errors.income }}
       <label for="income">年収:</label><br>
         <input type="number" id="income" name="income"/><br>
 
-      <label for="loan">借入金額:</label><br>
-        <input type="number" id="loan" name="loan"/><br>
-
-      <label for="loan-history-select">過去の借入歴:</label><br>
-        <select name= "loan-history" id="loan-history-select">
+      {{ form.errors.emp_exp }}
+      <label for="emp_exp">就業年数:</label><br>
+        <input type="number" id="emp_exp" name="emp_exp"/><br>
+      
+      {{ form.errors.loan_amount }}
+      <label for="loan_amount">融資金額:</label><br>
+        <input type="number" id="loan_amount" name="loan_amount"/><br>
+      
+      {{ form.errors.home_ownership }}
+      <label for="home_ownership-select">家の所有形態:</label><br>
+        <select name="home_ownership" id="home_ownership-select">
           <option value="">--選択してください--</option>
-          <option value="0">あり</option>
-          <option value="1">なし</option>
+          <option value="賃貸">賃貸</option>
+          <option value="自己所有">自己所有</option>
+          <option value="ローン付き">ローン付き</option>
+          <option value="その他">その他</option>
+        </select><br>
+
+      {{ form.errors.loan_intent }}
+      <label for="loan_intent-select">利用目的:</label><br>
+        <select name="loan_intent" id="loan_intent-select">
+          <option value="">--選択してください--</option>
+          <option value="債務返済">債務返済</option>
+          <option value="教育">教育</option>
+          <option value="リフォーム">リフォーム</option>
+          <option value="医療">医療</option>
+          <option value="私的">私的</option>
+          <option value="事業">事業</option>
+        </select><br>
+
+      {{ form.errors.default }}
+      <label for="default-select">不履行歴:</label><br>
+        <select name= "default" id="default-select">
+          <option value="">--選択してください--</option>
+          <option value="はい">はい</option>
+          <option value="いいえ">いいえ</option>
         </select><br>
 
       <br><br>
