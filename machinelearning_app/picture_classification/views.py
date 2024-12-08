@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
@@ -8,7 +9,6 @@ from django.views.decorators.http import require_POST
 import numpy as np
 import pickle
 import csv
-from sklearn.linear_model import LogisticRegression
 from picture_classification.models import Loan_Data
 from picture_classification.forms import Loan_Data_Form
 
@@ -108,6 +108,16 @@ def list_view(request):
     page_obj = paginator.page(paginator.num_pages)
 
   return render(request, 'list.html', {"page_obj": page_obj, 'page_number_list': page_number_list})
+
+
+def csv_export(request):
+  response = HttpResponse(content_type='text/csv')
+  response['Content-Disposition'] = 'attachment; filename="loan_data.csv"'
+  writer = csv.writer(response)
+  for ld in Loan_Data.objects.all():
+    writer.writerow([ld.name, ld.age, ld.gender, ld.education, ld.income, ld.emp_exp, ld.loan_amount, 
+        ld.home_ownership, ld.loan_intent, ld.default, ld.loan_status])
+  return response
 
 '''
 def edit_view(request, id):

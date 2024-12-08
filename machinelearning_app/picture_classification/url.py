@@ -10,5 +10,6 @@ urlpatterns = [
   path('nlp/', views.npl_view, name='nlp'),
   path('list/', views.list_view, name='list'),
   path('graph/', views.graph_view, name='graph'),
+  path('export', views.csv_export, name='csv'),
 ]
 
